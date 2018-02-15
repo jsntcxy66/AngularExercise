@@ -20,7 +20,6 @@ import { DISHES } from '../shared/dishes';
 export class DishdetailComponent implements OnInit {
 
   dish: Dish;
-  dishcopy = null;
   dishIds: number[];
   prev: number;
   next: number;
@@ -58,7 +57,6 @@ export class DishdetailComponent implements OnInit {
       .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
       .subscribe(dish => {
         this.dish = dish;
-        this.dishcopy = dish;
         this.setPrevNext(dish.id) 
       });
   }
@@ -104,8 +102,8 @@ export class DishdetailComponent implements OnInit {
   onSubmit() {
     this.comment = this.commentForm.value;
     this.comment.date = new Date().toISOString();
-    this.dishcopy.comments.push(this.comment);
-    console.log(this.dishcopy);
+    this.dish.comments.push(this.comment);
+    console.log(this.dish);
     this.commentForm.reset({
       author: '',
       rating: 5,
